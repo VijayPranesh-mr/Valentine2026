@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine? ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --rose-deep: #8B0A50;
+            --rose-vibrant: #D4145A;
+            --gold-shimmer: #FFD700;
+            --gold-dark: #B8860B;
+            --cream: #FFF5E6;
+            --burgundy: #5C0029;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            overflow-x: hidden;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><text y="15" font-size="16">💕</text></svg>'), auto;
+        }
+
+        .page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        #page1 {
+            background: linear-gradient(135deg, 
+                var(--burgundy) 0%, 
+                var(--rose-deep) 25%, 
+                var(--rose-vibrant) 50%,
+                #C73866 75%,
+                #E84C77 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            flex-direction: column;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .rose-petals {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .petal {
+            position: absolute;
+            background: radial-gradient(ellipse at center, rgba(255, 182, 193, 0.9) 0%, rgba(255, 105, 180, 0.4) 100%);
+            border-radius: 50% 0 50% 50%;
+            filter: blur(1px);
+            animation: petalFall 12s infinite;
+            box-shadow: 0 0 20px rgba(255, 182, 193, 0.3);
+        }
+
+        @keyframes petalFall {
+            0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(110vh) rotate(720deg) translateX(100px); opacity: 0; }
+        }
+
+        .sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--gold-shimmer);
+            border-radius: 50%;
+            animation: sparkleFloat 3s infinite;
+            box-shadow: 0 0 10px var(--gold-shimmer);
+        }
+
+        @keyframes sparkleFloat {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        .border-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            border: 20px solid;
+            border-image: linear-gradient(45deg, 
+                rgba(255, 215, 0, 0.3), 
+                rgba(255, 215, 0, 0.8),
+                rgba(255, 215, 0, 0.3)) 1;
+            box-shadow: inset 0 0 100px rgba(255, 215, 0, 0.1);
+        }
+
+        .corner-ornament {
+            position: absolute;
+            font-size: 4em;
+            color: var(--gold-shimmer);
+            text-shadow: 0 0 20px var(--gold-dark);
+            animation: pulse 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+        }
+
+        .corner-ornament.top-left { top: 30px; left: 30px; }
+        .corner-ornament.top-right { top: 30px; right: 30px; }
+        .corner-ornament.bottom-left { bottom: 30px; left: 30px; }
+        .corner-ornament.bottom-right { bottom: 30px; right: 30px; }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.2) rotate(10deg); }
+        }
+
+        .question-container {
+            text-align: center;
+            background: linear-gradient(135deg, 
+                rgba(255, 245, 230, 0.98) 0%,
+                rgba(255, 235, 215, 0.95) 100%);
+            padding: 80px 60px;
+            border-radius: 40px;
+            box-shadow: 
+                0 30px 90px rgba(0, 0, 0, 0.5),
+                inset 0 0 60px rgba(255, 215, 0, 0.1),
+                0 0 100px rgba(255, 182, 193, 0.3);
+            max-width: 700px;
+            position: relative;
+            z-index: 10;
+            border: 3px solid var(--gold-shimmer);
+            animation: containerGlow 4s ease-in-out infinite;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes containerGlow {
+            0%, 100% {
+                box-shadow: 
+                    0 30px 90px rgba(0, 0, 0, 0.5),
+                    inset 0 0 60px rgba(255, 215, 0, 0.1),
+                    0 0 100px rgba(255, 182, 193, 0.3);
+            }
+            50% {
+                box-shadow: 
+                    0 30px 90px rgba(0, 0, 0, 0.5),
+                    inset 0 0 80px rgba(255, 215, 0, 0.2),
+                    0 0 140px rgba(255, 182, 193, 0.5);
+            }
+        }
+
+        .flourish {
+            position: absolute;
+            font-size: 3em;
+            color: var(--rose-vibrant);
+            opacity: 0.3;
+        }
+
+        .flourish.left { left: -40px; top: 50%; transform: translateY(-50%) rotate(-20deg); }
+        .flourish.right { right: -40px; top: 50%; transform: translateY(-50%) rotate(20deg); }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4em;
+            font-weight: 900;
+            background: linear-gradient(135deg, 
+                var(--rose-deep) 0%,
+                var(--rose-vibrant) 50%,
+                var(--burgundy) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            animation: titleShine 3s ease-in-out infinite;
+        }
+
+        @keyframes titleShine {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.2); }
+        }
+
+        .subtitle {
+            font-size: 1.8em;
+            color: var(--rose-deep);
+            margin-bottom: 20px;
+            font-weight: 600;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .emoji {
+            font-size: 5em;
+            margin-bottom: 30px;
+            animation: emojiPulse 2s infinite;
+            filter: drop-shadow(0 10px 30px rgba(212, 20, 90, 0.4));
+        }
+
+        @keyframes emojiPulse {
+            0%, 100% { transform: scale(1) rotate(-5deg); }
+            50% { transform: scale(1.15) rotate(5deg); }
+        }
+
+        .buttons-container {
+            margin-top: 50px;
+            height: 180px;
+            position: relative;
+        }
+
+        button {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8em;
+            font-weight: 700;
+            padding: 20px 60px;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        #yesBtn {
+            background: linear-gradient(135deg, 
+                var(--rose-vibrant) 0%, 
+                #E84C77 50%,
+                var(--rose-vibrant) 100%);
+            background-size: 200% 200%;
+            color: white;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: yesGradient 3s ease infinite;
+            border: 3px solid var(--gold-shimmer);
+        }
+
+        @keyframes yesGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        #yesBtn:hover {
+            transform: translateX(-50%) scale(1.1) rotate(-2deg);
+            box-shadow: 
+                0 12px 40px rgba(212, 20, 90, 0.6),
+                0 0 30px var(--gold-shimmer);
+        }
+
+        #noBtn {
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.9) 0%, 
+                rgba(240, 240, 240, 0.8) 100%);
+            color: #666;
+            position: absolute;
+            border: 3px solid rgba(200, 200, 200, 0.5);
+            transition: all 0.2s ease;
+        }
+
+        .message {
+            position: absolute;
+            top: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8em;
+            font-weight: 900;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            color: white;
+            background: linear-gradient(135deg, 
+                var(--rose-vibrant) 0%,
+                var(--burgundy) 100%);
+            padding: 15px 35px;
+            border-radius: 50px;
+            border: 3px solid var(--gold-shimmer);
+            text-shadow: 
+                2px 2px 8px rgba(0, 0, 0, 0.8),
+                0 0 30px rgba(255, 215, 0, 0.6);
+            box-shadow: 
+                0 8px 30px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(255, 215, 0, 0.5),
+                inset 0 0 30px rgba(255, 215, 0, 0.2);
+            animation: messageFloat 2s ease-in-out infinite;
+        }
+
+        @keyframes messageFloat {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        .message.show {
+            opacity: 1;
+        }
+
+        #page2 {
+            background: linear-gradient(135deg, 
+                #FFF5E6 0%, 
+                #FFE4D6 25%,
+                #FFD6E8 50%,
+                #FFE6F0 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
+            padding: 60px 20px;
+            display: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Floating hearts for page 2 */
+        .page2-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-heart-2 {
+            position: absolute;
+            font-size: 30px;
+            animation: floatUp 15s infinite;
+            opacity: 0;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .collage-container {
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Decorative elements for page 2 */
+        .page2-sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--gold-shimmer);
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+            box-shadow: 0 0 15px var(--gold-shimmer);
+            pointer-events: none;
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.5) rotate(180deg);
+            }
+        }
+
+        .collage-ornament {
+            position: absolute;
+            font-size: 3em;
+            color: var(--gold-shimmer);
+            text-shadow: 0 0 20px var(--gold-dark);
+            animation: ornamentFloat 4s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+            z-index: 5;
+        }
+
+        @keyframes ornamentFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+        }
+
+        .collage-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5em;
+            font-weight: 900;
+            background: linear-gradient(135deg, 
+                var(--rose-deep) 0%,
+                var(--rose-vibrant) 50%,
+                var(--burgundy) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 60px;
+            letter-spacing: 3px;
+            animation: titlePulse 3s ease-in-out infinite;
+            filter: drop-shadow(0 4px 20px rgba(212, 20, 90, 0.4));
+            position: relative;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% {
+                transform: scale(1);
+                filter: drop-shadow(0 4px 20px rgba(212, 20, 90, 0.4));
+            }
+            50% {
+                transform: scale(1.05);
+                filter: drop-shadow(0 8px 30px rgba(212, 20, 90, 0.6));
+            }
+        }
+
+        .collage-title::before,
+        .collage-title::after {
+            content: '✨';
+            position: absolute;
+            font-size: 0.5em;
+            animation: sparkleRotate 3s linear infinite;
+        }
+
+        .collage-title::before {
+            left: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .collage-title::after {
+            right: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+            animation-delay: 1.5s;
+        }
+
+        @keyframes sparkleRotate {
+            0% {
+                transform: translateY(-50%) rotate(0deg) scale(1);
+            }
+            50% {
+                transform: translateY(-50%) rotate(180deg) scale(1.3);
+            }
+            100% {
+                transform: translateY(-50%) rotate(360deg) scale(1);
+            }
+        }
+
+        .heart-collage {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            height: 700px;
+            margin: 0 auto;
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.2));
+            animation: heartGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes heartGlow {
+            0%, 100% {
+                filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.2))
+                        drop-shadow(0 0 50px rgba(212, 20, 90, 0.3));
+            }
+            50% {
+                filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.2))
+                        drop-shadow(0 0 80px rgba(212, 20, 90, 0.6));
+            }
+        }
+
+        /* Add a decorative frame around the heart */
+        .heart-collage::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: -30px;
+            right: -30px;
+            bottom: -30px;
+            border: 3px solid var(--gold-shimmer);
+            border-radius: 50% 50% 0 0;
+            opacity: 0.3;
+            animation: frameRotate 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes frameRotate {
+            0% {
+                transform: rotate(0deg);
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: rotate(360deg);
+                opacity: 0.3;
+            }
+        }
+
+        .photo-frame {
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid;
+            border-image: linear-gradient(45deg, 
+                var(--gold-shimmer), 
+                #FFD700,
+                #FFA500,
+                var(--rose-vibrant),
+                #FFD700,
+                var(--gold-shimmer)) 1;
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.3),
+                0 0 20px rgba(255, 215, 0, 0.3),
+                inset 0 0 15px rgba(255, 215, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            background: white;
+            animation: borderShimmer 3s linear infinite;
+        }
+
+        @keyframes borderShimmer {
+            0% {
+                border-image: linear-gradient(45deg, 
+                    var(--gold-shimmer), 
+                    #FFD700,
+                    #FFA500,
+                    var(--rose-vibrant),
+                    #FFD700,
+                    var(--gold-shimmer)) 1;
+            }
+            50% {
+                border-image: linear-gradient(45deg, 
+                    var(--rose-vibrant),
+                    var(--gold-shimmer), 
+                    #FFD700,
+                    #FFA500,
+                    var(--rose-vibrant),
+                    #FFD700) 1;
+            }
+            100% {
+                border-image: linear-gradient(45deg, 
+                    var(--gold-shimmer), 
+                    #FFD700,
+                    #FFA500,
+                    var(--rose-vibrant),
+                    #FFD700,
+                    var(--gold-shimmer)) 1;
+            }
+        }
+
+        .photo-frame:hover {
+            transform: translate(-50%, -50%) scale(1.4) rotate(5deg) !important;
+            z-index: 100;
+            box-shadow: 
+                0 15px 50px rgba(0, 0, 0, 0.5),
+                0 0 50px var(--gold-shimmer),
+                inset 0 0 30px rgba(255, 215, 0, 0.4);
+            border-width: 7px;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-frame.placeholder {
+            background: linear-gradient(135deg, 
+                rgba(212, 20, 90, 0.1) 0%,
+                rgba(233, 76, 119, 0.1) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: var(--rose-vibrant);
+        }
+
+        
+        .love-message {
+            margin-top: 80px;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            font-weight: 900;
+            color: var(--rose-vibrant);
+            font-style: italic;
+            text-align: center;
+            line-height: 1.8;
+            animation: messageShine 4s ease-in-out infinite;
+            text-shadow: 
+                2px 2px 4px rgba(0, 0, 0, 0.3),
+                0 0 20px rgba(212, 20, 90, 0.5),
+                0 0 40px rgba(212, 20, 90, 0.3);
+            padding: 40px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.95) 0%,
+                rgba(255, 245, 230, 0.9) 100%);
+            backdrop-filter: blur(10px);
+            box-shadow: 
+                0 10px 40px rgba(0, 0, 0, 0.2),
+                inset 0 0 40px rgba(255, 215, 0, 0.2),
+                0 0 30px rgba(255, 215, 0, 0.3);
+            border: 3px solid var(--gold-shimmer);
+            position: relative;
+        }
+
+        @keyframes messageShine {
+            0%, 100% {
+                background-position: 0% 50%;
+                transform: scale(1);
+            }
+            50% {
+                background-position: 100% 50%;
+                transform: scale(1.02);
+            }
+        }
+
+        .love-message::before {
+            content: '💕';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2em;
+            animation: heartBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes heartBounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0) scale(1);
+            }
+            50% {
+                transform: translateX(-50%) translateY(-10px) scale(1.2);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            .question-container { padding: 50px 30px; }
+            .collage-title { font-size: 2.5em; }
+            .heart-collage { height: 500px; max-width: 500px; }
+            .photo-frame { width: 90px; height: 90px; }
+            button { font-size: 1.3em; padding: 15px 40px; }
+            .corner-ornament { font-size: 2em; }
+            .love-message { font-size: 1.5em; margin-top: 50px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="page1" class="page">
+        <div class="rose-petals" id="petalsContainer"></div>
+        <div class="sparkles" id="sparklesContainer"></div>
+        <div class="border-overlay"></div>
+        
+        <div class="corner-ornament top-left">❈</div>
+        <div class="corner-ornament top-right">❈</div>
+        <div class="corner-ornament bottom-left">❈</div>
+        <div class="corner-ornament bottom-right">❈</div>
+        
+        <div class="question-container">
+            <div class="flourish left">✿</div>
+            <div class="flourish right">✿</div>
+            
+            <div class="emoji">💝</div>
+            <div class="subtitle">My Dearest Love,</div>
+            <h1>Will You Be<br>My Valentine?</h1>
+            
+            <div class="message" id="teaseMessage"></div>
+            
+            <div class="buttons-container">
+                <button id="yesBtn">Yes! 💕</button>
+                <button id="noBtn">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="page2" class="page">
+        <div class="page2-hearts" id="page2HeartsContainer"></div>
+        
+        <div class="collage-container">
+            <div class="collage-ornament" style="top: 10%; left: 5%;">🌹</div>
+            <div class="collage-ornament" style="top: 10%; right: 5%; animation-delay: 1s;">🌹</div>
+            <div class="collage-ornament" style="bottom: 15%; left: 8%; animation-delay: 2s;">💐</div>
+            <div class="collage-ornament" style="bottom: 15%; right: 8%; animation-delay: 3s;">💐</div>
+            
+            <h2 class="collage-title">I Love You Kavya❤️</h2>
+            
+            <div class="heart-collage" id="heartCollage"></div>
+
+            <div class="love-message">
+                You're stuck with me forever! 💕<br>
+                Happy Valentine's Day, my love! ✨
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function createRosePetals() {
+            const container = document.getElementById('petalsContainer');
+            for (let i = 0; i < 30; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.style.left = Math.random() * 100 + '%';
+                petal.style.width = (Math.random() * 30 + 20) + 'px';
+                petal.style.height = (Math.random() * 30 + 20) + 'px';
+                petal.style.animationDelay = Math.random() * 12 + 's';
+                petal.style.animationDuration = (Math.random() * 8 + 10) + 's';
+                container.appendChild(petal);
+            }
+        }
+
+        function createSparkles() {
+            const container = document.getElementById('sparklesContainer');
+            for (let i = 0; i < 50; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 3 + 's';
+                sparkle.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                container.appendChild(sparkle);
+            }
+        }
+
+        createRosePetals();
+        createSparkles();
+
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const teaseMessage = document.getElementById('teaseMessage');
+        
+        const messages = [
+            "U can't choose no! 💕",
+            "Nice try! But NO isn't an option 😘",
+            "You're stuck with me! 💖",
+            "Stop running away! 😂",
+            "The answer is YES! 💕",
+            "Give up already! 🥰",
+            "You know you want to say yes! 💝",
+            "I'm not giving up! 💪❤️",
+            "There's only one right answer! 😉",
+            "Just say YES already! 💕"
+        ];
+        
+        let messageIndex = 0;
+        let yesBtnSize = 1;
+
+        noBtn.addEventListener('mouseenter', () => {
+            const container = document.querySelector('.buttons-container');
+            const maxX = container.offsetWidth - noBtn.offsetWidth;
+            const maxY = container.offsetHeight - noBtn.offsetHeight;
+            
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+            
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+            noBtn.style.transform = 'rotate(' + (Math.random() * 20 - 10) + 'deg)';
+            
+            teaseMessage.textContent = messages[messageIndex % messages.length];
+            teaseMessage.classList.add('show');
+            
+            setTimeout(() => {
+                teaseMessage.classList.remove('show');
+            }, 2500);
+            
+            messageIndex++;
+            yesBtnSize += 0.12;
+            yesBtn.style.transform = `translateX(-50%) scale(${yesBtnSize})`;
+        });
+
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const container = document.querySelector('.buttons-container');
+            const maxX = container.offsetWidth - noBtn.offsetWidth;
+            const maxY = container.offsetHeight - noBtn.offsetHeight;
+            
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+            
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+            noBtn.style.transform = 'rotate(' + (Math.random() * 20 - 10) + 'deg)';
+            
+            teaseMessage.textContent = messages[messageIndex % messages.length];
+            teaseMessage.classList.add('show');
+            
+            setTimeout(() => {
+                teaseMessage.classList.remove('show');
+            }, 2500);
+            
+            messageIndex++;
+            yesBtnSize += 0.12;
+            yesBtn.style.transform = `translateX(-50%) scale(${yesBtnSize})`;
+        });
+
+        noBtn.style.left = '50%';
+        noBtn.style.top = '100px';
+        noBtn.style.transform = 'translateX(-50%)';
+
+        yesBtn.addEventListener('click', () => {
+            document.querySelector('.question-container').style.transform = 'scale(0) rotate(180deg)';
+            document.querySelector('.question-container').style.transition = 'transform 0.8s ease';
+            document.querySelector('.question-container').style.opacity = '0';
+            
+            setTimeout(() => {
+                document.getElementById('page1').style.display = 'none';
+                document.getElementById('page2').style.display = 'flex';
+                createPage2Effects();
+            }, 800);
+        });
+
+        // Create floating hearts and sparkles for page 2
+        function createPage2Effects() {
+            const heartsContainer = document.getElementById('page2HeartsContainer');
+            const hearts = ['❤️', '💕', '💖', '💗', '💝', '💞', '💓'];
+            
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart-2';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 15 + 's';
+                heart.style.animationDuration = (Math.random() * 10 + 12) + 's';
+                heartsContainer.appendChild(heart);
+            }
+
+            // Add sparkles around the collage
+            const collageContainer = document.querySelector('.collage-container');
+            for (let i = 0; i < 30; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'page2-sparkle';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 2 + 's';
+                collageContainer.appendChild(sparkle);
+            }
+        }
+
+        const heartCollage = document.getElementById('heartCollage');
+        
+        // 17 photo positions and placeholder paths
+        const photos = [
+            // REPLACE THESE PATHS WITH YOUR IMAGE PATHS
+            {x: 28, y: 12, src: 'love1.jpg'},    // Top left lobe
+            {x: 16, y: 20, src: 'love2.jpg'},
+            {x: 10, y: 32, src: 'love3.jpg'},
+            {x: 8, y: 45, src: 'love4.jpg'},
+            {x: 13, y: 58, src: 'love5.jpg'},    // Left side
+            {x: 20, y: 70, src: 'love6.jpg'},
+            {x: 30, y: 82, src: 'love7.jpg'},
+            {x: 40, y: 92, src: 'love8.jpg'},    // Bottom curve
+            {x: 50, y: 98, src: 'love9.jpg'},    // Bottom center
+            {x: 60, y: 92, src: 'love10.jpg'},
+            {x: 70, y: 82, src: 'love11.jpg'},
+            {x: 80, y: 70, src: 'love12.jpg'},   // Right side
+            {x: 87, y: 58, src: 'love13.jpg'},
+            {x: 92, y: 45, src: 'love14.jpg'},   // Top right lobe
+            {x: 90, y: 32, src: 'love15.jpg'},
+            {x: 84, y: 20, src: 'love16.jpg'},
+            {x: 72, y: 12, src: 'love17.jpg'}
+        ];
+
+        photos.forEach((photo, index) => {
+            const frame = document.createElement('div');
+            frame.className = 'photo-frame';
+            
+            const img = document.createElement('img');
+            img.src = photo.src;
+            img.alt = `Photo ${index + 1}`;
+            frame.appendChild(img);
+            
+            frame.style.left = photo.x + '%';
+            frame.style.top = photo.y + '%';
+            frame.style.transform = 'translate(-50%, -50%)';
+            
+            heartCollage.appendChild(frame);
+            
+            // Animate entrance
+            setTimeout(() => {
+                frame.style.opacity = '0';
+                frame.style.transform = 'translate(-50%, -50%) scale(0) rotate(-180deg)';
+                setTimeout(() => {
+                    frame.style.transition = 'all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+                    frame.style.opacity = '1';
+                    frame.style.transform = 'translate(-50%, -50%) scale(1) rotate(0deg)';
+                }, 10);
+            }, index * 100);
+        });
+    </script>
+</body>
+</html>
